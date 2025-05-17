@@ -35,7 +35,6 @@ pipeline {
             fi
             cd ./pets
             git reset --hard origin/$BRANCH_NAME
-            git log   
           '''
         }
       }
