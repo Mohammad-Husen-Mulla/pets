@@ -1,7 +1,7 @@
 pipeline {
     agent {
         node { label 'N1'
-        customWorkspace "/home/ubuntu/workspace/husen-build"
+        customWorkspace "/home/ubuntu/workspace/project"
        }
      }
     
