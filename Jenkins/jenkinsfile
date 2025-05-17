@@ -1,0 +1,53 @@
+pipeline {
+    agent {
+        node { label 'N1'
+        customWorkspace "/home/ubuntu/workspace/husen-build"
+       }
+     }
+    
+    stages {
+        stage("Clean Workspace") {
+            when {
+                expression {
+                    params.CLEAN_BUILD == true
+                }
+            }
+            steps {
+                sh '''
+                  #!/bin/bash
+                  rm -rf ./* 
+                  if [ $? -eq 0 ]
+                  then
+                   echo "workspace cleaned!"
+                  fi
+                '''
+            }
+        }
+
+      stage("Clone Repo") {
+        steps{
+          sh'''
+            if [ -d "./pets" ]
+            then
+              echo "Directory Exists"
+            else
+              git clone $REPO_URL
+            fi
+            cd ./pets
+            git reset --hard origin/$BRANCH_NAME
+            git log   
+          '''
+        }
+      }
+
+      stage("Read File") {
+        steps{
+          sh"""
+            cd pets
+            cat Pets.txt
+          """
+        }
+      }  
+    }
+    
+}
