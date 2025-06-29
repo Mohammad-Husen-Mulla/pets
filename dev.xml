@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+    <remote name="aosp"
+            fetch="https://android.googlesource.com/" />
+
+    <default revision="android-14.0.0_r1"
+             remote="aosp"
+             sync-j="4" />
+
+    <!-- Core Android platform with group assignment -->
+    <project name="platform/build" path="build" groups="ut-update,core" />
+    <project name="platform/build/soong" path="build/soong" groups="ut-update,core" />
+    <project name="platform/frameworks/base" path="frameworks/base" groups="ut-update,frameworks" />
+    <project name="platform/system/core" path="system/core" groups="ut-update,system" />
+
+    <!-- Optional tools/hooks -->
+    <project name="platform/tools/repohooks" path="tools/repohooks" groups="tools" />
+    
+    <repo-hooks in-project="platform/tools/repohooks"
+                enabled-list="pre-upload" />
+
+</manifest>
